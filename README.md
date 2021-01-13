@@ -1,6 +1,5 @@
-# Update 2020-02-12
-
-GitHub has just introduced new environment variables, `GITHUB_RUN_ID` and `GITHUB_RUN_NUMBER` which are unique numbers for each workflow run, so you're probably better off using those than this GitHub action. 🙂 See https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
+## Notice: GitHub Env Variables
+GitHub has some environment variables which seem like they'd suit this however the number seems to reset when modified making it not truly unique.
 
 # build-number
 GitHub action for generating sequential build numbers for GitHub actions. The build number is stored in your GitHub repository as a ref, it doesn't add any extra commits to your repository. Use in your workflow like so:
@@ -70,14 +69,14 @@ jobs:
 
 ## Setting the initial build number.
 
-If you're moving from another build system, you might want to start from some specific number. The `build-number` action simply uses a special tag name to store the build number, `build-number-x`, so you can just create and push a tag with the number you want to start on. E.g. do
+If you're moving from another build system, you might want to start from some specific number. The `build-number` action simply uses a special tag name to store the build number, `x`, so you can just create and push a tag with the number you want to start on. E.g. do
 
 ```
-git tag build-number-500
-git push origin build-number-500
+git tag 500
+git push origin 500
 ```
 
-and then your next build number will be 501. The action will always delete older refs that start with `build-number-`, e.g. when it runs and finds `build-number-500` it will create a new tag, `build-number-501` and then delete `build-number-500`.
+and then your next build number will be 501.
 
 ## Generating multiple independent build numbers
 
@@ -97,9 +96,9 @@ jobs:
         prefix: client
 ```
 
-This will generate a git tag like `client-build-number-1`.
+This will generate a git tag like `client-1`.
 
-If you then do the same in another workflow and use `prefix: server` then you'll get a second build-number tag called `server-build-number-1`.
+If you then do the same in another workflow and use `prefix: server` then you'll get a second build-number tag called `server-1`.
 
 ## Branches and build numbers
 
