@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: WalshyDev/build-number@v4
+      uses: WalshyDev/build-number@v4.1
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
@@ -27,7 +27,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: WalshyDev/build-number@v4 
+      uses: WalshyDev/build-number@v4.1 
       with:
         token: ${{secrets.github_token}}        
     
@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: WalshyDev/build-number@v4 
+      uses: WalshyDev/build-number@v4.1 
       with:
         token: ${{secrets.github_token}}
           
@@ -90,7 +90,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: WalshyDev/build-number@v4 
+      uses: WalshyDev/build-number@v4.1 
       with:
         token: ${{ secrets.github_token }}
         prefix: client
