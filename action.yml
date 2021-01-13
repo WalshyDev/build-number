@@ -1,6 +1,6 @@
 name: 'Build Number Generator'
 description: 'Generate sequential build numbers for workflow runs'
-author: 'Einar Egilsson'
+author: 'WalshyDev - Forked from Einar Egilsson'
 runs:
   using: 'node12'
   main: 'main.js'

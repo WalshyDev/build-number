@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: einaregilsson/build-number@v3
+      uses: WalshyDev/build-number@v4
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
@@ -27,7 +27,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: einaregilsson/build-number@v3 
+      uses: WalshyDev/build-number@v4 
       with:
         token: ${{secrets.github_token}}        
     
@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: einaregilsson/build-number@v3 
+      uses: WalshyDev/build-number@v4 
       with:
         token: ${{secrets.github_token}}
           
@@ -90,7 +90,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: einaregilsson/build-number@v3 
+      uses: WalshyDev/build-number@v4 
       with:
         token: ${{ secrets.github_token }}
         prefix: client
@@ -104,4 +104,4 @@ If you then do the same in another workflow and use `prefix: server` then you'll
 
 The build number generator is global, there's no concept of special build numbers for special branches unless handled manually with the `prefix` property. It's probably something you would just use on builds from your master branch. It's just one number that gets increased every time the action is run.
 
-So, that's it. Hope you can use it. You can read more about how it works in this blog post: http://einaregilsson.com/a-github-action-for-generating-sequential-build-numbers/
+So, that's it. Hope you can use it. You can read more about how it works in this blog post: http://WalshyDev.com/a-github-action-for-generating-sequential-build-numbers/
