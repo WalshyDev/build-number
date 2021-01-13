@@ -10,7 +10,6 @@ function fail(message, exitCode=1) {
 }
 
 function request(method, path, data, callback) {
-    
     try {
         if (data) {
             data = JSON.stringify(data);
@@ -82,7 +81,6 @@ function main() {
     }
 
     request('GET', `/repos/${env.GITHUB_REPOSITORY}/git/refs/tags/${prefix}`, null, (err, status, result) => {
-    
         let nextBuildNumber, nrTags;
     
         if (status === 404) {
@@ -93,7 +91,7 @@ function main() {
             const regexString = `/${prefix}(\\d+)$`;
             const regex = new RegExp(regexString);
             nrTags = result.filter(d => d.ref.match(regex));
-            
+
             //Existing build numbers:
             let nrs = nrTags.map(t => parseInt(t.ref.match(/-(\d+)$/)[1]));
     
@@ -129,6 +127,21 @@ function main() {
             console.log(`::set-output name=build_number::${nextBuildNumber}`);
             //Save to file so it can be used for next jobs...
             fs.writeFileSync('BUILD_NUMBER', nextBuildNumber.toString());
+
+             //Cleanup
+            if (nrTags) {
+                console.log(`Deleting ${nrTags.length} older build counters...`);
+            
+                for (let nrTag of nrTags) {
+                    request('DELETE', `/repos/${env.GITHUB_REPOSITORY}/git/${nrTag.ref}`, null, (err, status, result) => {
+                        if (status !== 204 || err) {
+                            console.warn(`Failed to delete ref ${nrTag.ref}, status: ${status}, err: ${err}, result: ${JSON.stringify(result)}`);
+                        } else {
+                            console.log(`Deleted ${nrTag.ref}`);
+                        }
+                    });
+                }
+            }
         });
     });
 }
