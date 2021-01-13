@@ -93,7 +93,7 @@ function main() {
             nrTags = result.filter(d => d.ref.match(regex));
 
             //Existing build numbers:
-            let nrs = nrTags.map(t => parseInt(t.ref.match(/-(\d+)$/)[1]));
+            let nrs = nrTags.map(t => parseInt(t.ref.match(/(\d+)$/)[1]));
     
             let currentBuildNumber = Math.max(...nrs);
             console.log(`Last build nr was ${currentBuildNumber}.`);
